@@ -25,7 +25,7 @@ app.get('/users/:userId', async (req, res) => {
 
   try {
     // Kiểm tra trong bảng user
-    let userQuery = await db.query('SELECT name, profile_image_url FROM "user" WHERE id = $1', [userId]);
+    let userQuery = await db.query('SELECT name, profile_image_url FROM "users" WHERE id = $1', [userId]);
     if (userQuery.rows.length > 0) {
       return res.json({
         id: userId,
@@ -36,7 +36,7 @@ app.get('/users/:userId', async (req, res) => {
     }
 
     // Kiểm tra trong bảng driver
-    let driverQuery = await db.query('SELECT name, profile_image_url FROM driver WHERE id = $1', [userId]);
+    let driverQuery = await db.query('SELECT name, profile_image_url FROM drivers WHERE id = $1', [userId]);
     if (driverQuery.rows.length > 0) {
       return res.json({
         id: userId,
@@ -80,13 +80,13 @@ app.get('/chat-rooms/:userId', async (req, res) => {
 
         try {
           if (room.user_id === userId) {
-            const driverQuery = await db.query('SELECT name FROM driver WHERE id = $1', [otherUserId]);
+            const driverQuery = await db.query('SELECT name FROM drivers WHERE id = $1', [otherUserId]);
             if (driverQuery.rows.length > 0) {
               otherUserName = driverQuery.rows[0].name;
               role = 'driver';
             }
           } else {
-            const userQuery = await db.query('SELECT name FROM "user" WHERE id = $1', [otherUserId]);
+            const userQuery = await db.query('SELECT name FROM "users" WHERE id = $1', [otherUserId]);
             if (userQuery.rows.length > 0) {
               otherUserName = userQuery.rows[0].name;
               role = 'user';
