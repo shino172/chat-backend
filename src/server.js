@@ -8,7 +8,6 @@ require("dotenv").config();
 const db = require("./db");
 const e = require("express");
 
-app.use(e.static("public"));
 const app = express();
 const server = http.createServer(app);
 
