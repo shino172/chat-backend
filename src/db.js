@@ -22,14 +22,12 @@
 const { Pool } = require("pg");
 require("dotenv").config();
 
-// Chuỗi kết nối đến Neon
 const connectionString = process.env.DATABASE_URL || "postgresql://neondb_owner:npg_jLiasfem92WN@ep-broad-poetry-a55ul0er-pooler.us-east-2.aws.neon.tech/Chat";
 
-// Cấu hình Pool để kết nối với Neon
 const pool = new Pool({
   connectionString: connectionString,
   ssl: {
-    rejectUnauthorized: false, // Bật SSL và bỏ qua kiểm tra chứng chỉ (cần thiết cho Neon)
+    rejectUnauthorized: false, 
   },
 });
 
