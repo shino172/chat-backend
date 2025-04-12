@@ -459,8 +459,7 @@ app.post("/messages/mark-as-read/:roomId/:userId", async (req, res) => {
       is_read: msg.is_read,
     }));
 
-    // Gửi sự kiện messagesRead đến tất cả client trong room
-    io.to(roomId).emit("messagesRead", { roomId });
+    io.to(roomId).emit("messagesRead", updatedMessages);
 
     res.json({ success: true });
   } catch (error) {
